@@ -77,11 +77,22 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': dj_database_url.config( 
+#         default=os.environ.get('DATABASE_URL')
+#     )
+# }
 DATABASES = {
-    'default': dj_database_url.config( 
-        default=os.environ.get('DATABASE_URL')
-    )
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'superkart_db',
+            'USER': 'postgres',
+            'PASSWORD': 'Nanera@372',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
 }
+
 
 
 # Password validation
@@ -126,7 +137,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-import dj_database_url
 from django.contrib.messages import constants as messages # type: ignore
 
 MESSAGE_TAGS = {
