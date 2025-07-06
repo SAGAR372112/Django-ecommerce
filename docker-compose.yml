@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: greatkart
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Nanera@372
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: gunicorn superkart.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

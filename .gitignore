@@ -1,0 +1,73 @@
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media and static files
+/media/
+/staticfiles/
+/static/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.pipenv/
+Pipfile.lock
+
+# VS Code and other IDE/editor configs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Environment variables
+.env
+.env.*
+
+# Migrations (optional to ignore, but useful in shared projects)
+**/migrations/*.pyc
+**/migrations/__pycache__/
+**/migrations/*.py
+!*/migrations/__init__.py  # Keep __init__.py
+
+# Node and frontend builds (if any)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Mac OS and Windows
+.DS_Store
+Thumbs.db
