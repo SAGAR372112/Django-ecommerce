@@ -39,9 +39,7 @@ class MyAccountManager(BaseUserManager):
         user.is_staff = True
         user.is_superadmin = True
         user.save(using=self._db)
-        return user
-
-
+        return user     
 
 class Account(AbstractBaseUser):
     first_name      = models.CharField(max_length=50)
@@ -76,6 +74,12 @@ class Account(AbstractBaseUser):
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
     
+    class Meta:
+        db_table = 'accounts'
+        ordering = ['-date_joined']              
+        verbose_name = 'Account'                 
+        verbose_name_plural = 'Accounts'
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     address_line_1 = models.CharField(blank=True, max_length=100)
@@ -90,5 +94,8 @@ class UserProfile(models.Model):
     
     def full_address(self):
         return f'{self.address_line_1} {self.address_line_2}'
-
-
+    
+    class Meta:
+        db_table = 'userprofiles'
+        verbose_name = 'UserProfile'
+        verbose_name_plural = 'UserProfiles'

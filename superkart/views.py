@@ -3,7 +3,6 @@ from store.models import Product, ReviewRating
 
 def home(request):
     products = Product.objects.all().filter(is_available=True).order_by('-created_date')
-
     product_reviews = {}
     # Get the reviews
 
@@ -15,6 +14,4 @@ def home(request):
         'products': products,
          'product_reviews': product_reviews,
     }
-
     return render( request, 'home.html', context)
-

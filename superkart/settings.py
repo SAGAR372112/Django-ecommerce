@@ -1,7 +1,6 @@
 from decouple import config # type: ignore
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool) # cast=bool is used to convert the string to boolean
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'ecommerce-store.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,20 +77,15 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config( 
-        default=os.environ.get('DATABASE_URL')
-    )
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'superkart_db',
+            'USER': 'postgres',
+            'PASSWORD': 'Nanera@372',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
 }
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'superkart_db',
-#             'USER': 'postgres',
-#             'PASSWORD': 'Nanera@372',
-#             'HOST': 'localhost',
-#             'PORT': '5432',
-#         }
-# }
 
 
 

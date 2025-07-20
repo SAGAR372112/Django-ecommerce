@@ -1,9 +1,6 @@
 from carts.views import _cart_id
 from .models import CartItem, Cart
 
-
-
-
 def counter(request):
     cart_count = 0
     if 'admin' in request.path:
@@ -20,4 +17,3 @@ def counter(request):
         except Cart.DoesNotExist:
             cart_count = 0
     return dict(cart_count=cart_count)
-                

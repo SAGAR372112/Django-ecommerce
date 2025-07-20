@@ -3,7 +3,6 @@ from django.urls import reverse
 from accounts.models import Account
 from category.models import Category
 
-
 class Product(models.Model):
     product_name    = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True)
@@ -36,6 +35,12 @@ class Product(models.Model):
             count = int(reviews['count'])
         return count
     
+    class Meta:
+        db_table = 'products'
+        ordering = ['-created_date']              
+        verbose_name = 'product'                 
+        verbose_name_plural = 'products'
+    
 class VariationManager(models.Manager):
     def colors(self):
         return super().filter(variation_category='color', is_active=True)
@@ -66,6 +71,12 @@ class Variation(models.Model):
 
     def __str__(self):
         return f'{self.product.product_name} - {self.variation_category or "No Category"} : {self.variation_value or "No Value"}'
+    
+    class Meta:
+        db_table = 'variations'
+        ordering = ['-created_date']              
+        verbose_name = 'variation'                 
+        verbose_name_plural = 'variations'
 
 class ReviewRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -80,6 +91,12 @@ class ReviewRating(models.Model):
 
     def __str__(self):
         return self.subject
+    
+    class Meta:
+        db_table = 'reviewrating'
+        ordering = ['created_at']              
+        verbose_name = 'reviewrating'                 
+        verbose_name_plural = 'reviewratings'
 
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
@@ -89,16 +106,6 @@ class ProductGallery(models.Model):
         return self.product.product_name
 
     class Meta:
-        verbose_name = 'productgallery'
-        verbose_name_plural = 'product gallery'
-
-class ProductGallery(models.Model):
-    product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='store/products', max_length=255)
-
-    def __str__(self):
-        return self.product.product_name
-
-    class Meta:
+        db_table = 'productgallery'
         verbose_name = 'productgallery'
         verbose_name_plural = 'product gallery'

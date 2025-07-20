@@ -13,7 +13,12 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.payment_id
-
+    
+    class Meta:
+        db_table = 'payments'
+        ordering = ['-created_at']
+        verbose_name = 'payment'
+        verbose_name_plural = 'payments'
 
 class Order(models.Model):
     STATUS = {
@@ -50,8 +55,13 @@ class Order(models.Model):
         return f"{self.address_line_1} {self.address_line_2}".capitalize()
     
     def __str__(self):
-        return self.user.first_name 
+        return self.user.first_name
     
+    class Meta:
+        db_table = 'orders'
+        ordering = ['created_at', 'updated_at'] 
+        verbose_name = 'order'
+        verbose_name_plural = 'orders'
     
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -67,4 +77,9 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.order.order_number
-
+    
+    class Meta:
+        db_table = 'orderproducts'
+        ordering = ['-created_at', 'updated_at']
+        verbose_name = 'orderproduct'
+        verbose_name_plural = 'orderproducts'

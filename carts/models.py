@@ -9,10 +9,16 @@ class Cart(models.Model):
     def __str__(self):
         return self.cart_id
     
+    class Meta:
+        db_table = 'carts'
+        ordering = ['-date_added']
+        verbose_name = 'Cart'
+        verbose_name_plural = 'Carts'
+    
 class CartItem(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    variations = models.ManyToManyField(Variation, blank=True, null=True)
+    variations = models.ManyToManyField(Variation, blank=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
@@ -22,3 +28,8 @@ class CartItem(models.Model):
     
     def __unicode__(self):
         return self.product
+    
+    class Meta:
+        db_table = 'cartitems'
+        verbose_name = 'CartItem'
+        verbose_name_plural = 'CartItems'
